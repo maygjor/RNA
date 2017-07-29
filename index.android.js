@@ -15,25 +15,28 @@ import Root from './src/main';
 export default class tawsil extends Component {
   render() {
     return (
-      <View style={styles.container}>
+<View style={styles.container}>
        <Root {...this.props}/>
-      </View>
+       </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   },
   instructions: {
     textAlign: 'center',
-    marginBottom: 5,
+    color:'#333333',
+    marginBottom: 5
   }
 });
 

@@ -14,16 +14,18 @@ export function getCurrentLocation(){
   return(dispatch)=>{
     navigator.geolocation.getCurrentPosition(
       (position)=>{
-      dispatch({
-        type:GET_CURRENT_LOCATION,
-        payload:position
-      });
-    },
-  (error)=> console.log(error.message),
-  {enableHighAccuracy:true,timeout:20000,maximumAge:1000}
-);
+        dispatch({
+          type:GET_CURRENT_LOCATION,
+          payload:position
+        });
+      },
+      (error)=>{
+        console.log(error.message),
+        {enableHighAccuracy:true,timeout:20000,maximumAge:1000}
+      }
+   );
   }
-}
+};
 //-------------------
 //----Actions Handlers----//
 function handleGetCurrentLocation(state,action){
@@ -47,12 +49,10 @@ function handleGetCurrentLocation(state,action){
 //-------------------
 
 
-const ACTION_HANDLERS={
+const ACTION_HANDLERS = {
  GET_CURRENT_LOCATION:handleGetCurrentLocation
 }
-const initialState= {
-  region:{}
-};
+const initialState= {region:{}};
 
 export function HomeReducer (state=initialState,action){
   const handler=ACTION_HANDLERS[action.type];
