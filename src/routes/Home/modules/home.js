@@ -2,7 +2,7 @@ import update from 'react-addons-update';
 import constants from './actionConstants';
 import {Dimensions} from "react-native";
 //----Constrants----//
-const {GET_CURRENT_LOCATION}=constants;
+const {GET_CURRENT_LOCATION,GET_INPUT}=constants;
 const {width, height}= Dimensions.get("window");
 const ASPECT_RATIO= width / height;
 const LATITUDE_DELTA= 0.0922;
@@ -27,6 +27,15 @@ export function getCurrentLocation(){
   }
 };
 //-------------------
+//Get User Input
+export function getInputData(payload){
+  return{
+    type:GET_INPUT,
+    payload
+  }
+}
+
+//-------------------
 //----Actions Handlers----//
 function handleGetCurrentLocation(state,action){
   return update(state,{
@@ -46,13 +55,27 @@ function handleGetCurrentLocation(state,action){
     }
   });
 }
+function handleGetInputData(state,action){
+  const {key, value} =action.payload;
+  return update(state,{
+    inputData:{
+      [key]:{
+        $set:value
+      }
+    }
+  });
+}
 //-------------------
 
 
 const ACTION_HANDLERS = {
- GET_CURRENT_LOCATION:handleGetCurrentLocation
+ GET_CURRENT_LOCATION:handleGetCurrentLocation,
+ GET_INPUT:handleGetInputData
 }
-const initialState= {region:{}};
+const initialState= {
+  region:{},
+  inputData:{}
+};
 
 export function HomeReducer (state=initialState,action){
   const handler=ACTION_HANDLERS[action.type];
